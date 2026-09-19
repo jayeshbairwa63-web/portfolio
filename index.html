@@ -1,45 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jayesh Bairwa | Portfolio</title>
+    <title>Smart Digital Clock & Weather App</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 0; text-align: center; }
-        header { background: linear-gradient(135deg, #0078d4, #005a9e); color: white; padding: 60px 20px; }
-        h1 { margin: 0; font-size: 2.5em; }
-        .container { max-width: 800px; margin: 30px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .skills-list { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0; list-style: none; }
-        .skills-list li { background: #0078d4; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; }
-        button { background-color: #28a745; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        button:hover { background-color: #218838; }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #1f4068, #162447); color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; margin: 0; }
+        .wrapper { background: rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); text-align: center; max-width: 400px; width: 100%; }
+        h1 { margin: 0; font-size: 3em; letter-spacing: 2px; color: #00fff0; }
+        p { font-size: 1.2em; color: #e4e4e4; }
+        .search-box { margin-top: 25px; display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 16px; outline: none; }
+        button { background: #00fff0; color: #162447; border: none; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #00b8ad; transform: scale(1.05); }
+        .weather-info { margin-top: 25px; display: none; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Hello, I'm Jayesh Bairwa 👋</h1>
-        <p>Web Developer | Student at MGGS</p>
-    </header>
-    <div class="container">
-        <h2>About Me</h2>
-        <p>I am an enthusiastic student passionate about coding and web development. I focus on frontend design and building logical backend applications using Python.</p>
-        
-        <h2>My Skills</h2>
-        <ul class="skills-list">
-            <li>HTML5</li>
-            <li>CSS3</li>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Flask Framework</li>
-        </ul>
 
-        <button onclick="showAlert()">Contact Me</button>
+<div class="wrapper">
+    <h2 style="margin-top:0;">⌚ Smart Dashboard</h2>
+    <h1 id="clock">00:00:00 PM</h1>
+    <p id="date">Loading Date...</p>
+
+    <div class="search-box">
+        <input type="text" id="cityInput" placeholder="Enter city name...">
+        <button onclick="checkWeather()">Search</button>
     </div>
-    <script>
-        function showAlert() {
-            alert('Feel free to reach out at: jayeshbairwa63@gmail.com');
-        }
-    </script>
+
+    <div class="weather-info" id="weatherInfo">
+        <h3 id="cityName" style="margin:0; color:#00fff0;">City</h3>
+        <p id="temp" style="font-size: 1.8em; margin: 10px 0; font-weight:bold;">25°C</p>
+        <p id="desc" style="margin:0; text-transform: capitalize;">Clear Sky</p>
+    </div>
+</div>
+
+<script>
+    // लाइव डिजिटल घड़ी का लॉजिक
+    function updateClock() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let seconds = now.getSeconds();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        
+        hours = hours % 12;
+        hours = hours ? hours : 12; 
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        seconds = seconds < 10 ? '0'+seconds : seconds;
+        
+        document.getElementById('clock').innerHTML = hours + ":" + minutes + ":" + seconds + " " + ampm;
+        
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('date').innerHTML = now.toLocaleDateString('en-US', options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // डमी वेदर लॉजिक (इंटरव्यू में दिखाने के लिए फ्रंटएंड रेडी)
+    function checkWeather() {
+        const city = document.getElementById('cityInput').value;
+        if(city.trim() === "") { alert("Please enter a city name!"); return; }
+        
+        document.getElementById('cityName').innerText = city;
+        // हमने रैंडम तापमान जनरेट किया है ताकि ऐप बिना API की के भी लाइव काम करे
+        const randomTemp = Math.floor(Math.random() * (40 - 15 + 1)) + 15;
+        document.getElementById('temp').innerText = randomTemp + "°C";
+        document.getElementById('desc').innerText = "Sunny with Clear Sky (Live Mock Data)";
+        document.getElementById('weatherInfo').style.display = "block";
+    }
+</script>
+
 </body>
 </html>
