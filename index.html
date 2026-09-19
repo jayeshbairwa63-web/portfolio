@@ -1,59 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Text Analyzer</title>
+    <title>Jayesh Bairwa | Portfolio</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .box { max-width: 600px; width: 100%; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 40px; }
-        h2 { color: #0078d4; margin-top: 0; text-align: center; }
-        textarea { width: 100%; height: 150px; padding: 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 16px; resize: none; box-sizing: border-box; outline: none; transition: 0.3s; }
-        textarea:focus { border-color: #0078d4; }
-        .stats { display: flex; justify-content: space-between; margin-top: 20px; background: #f8f9fa; padding: 15px; border-radius: 8px; }
-        .stat-item { text-align: center; }
-        .stat-item span { display: block; font-size: 24px; font-weight: bold; color: #0078d4; }
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 0; text-align: center; }
+        header { background: linear-gradient(135deg, #0078d4, #005a9e); color: white; padding: 60px 20px; }
+        h1 { margin: 0; font-size: 2.5em; }
+        .container { max-width: 800px; margin: 30px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .skills-list { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 0; list-style: none; }
+        .skills-list li { background: #0078d4; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; }
+        button { background-color: #28a745; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        button:hover { background-color: #218838; }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Hello, I'm Jayesh Bairwa 👋</h1>
+        <p>Web Developer | Student at MGGS</p>
+    </header>
+    <div class="container">
+        <h2>About Me</h2>
+        <p>I am an enthusiastic student passionate about coding and web development. I focus on frontend design and building logical backend applications using Python.</p>
+        
+        <h2>My Skills</h2>
+        <ul class="skills-list">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>Flask Framework</li>
+        </ul>
 
-<div class="box">
-    <h2>📝 Smart Text Analyzer</h2>
-    <textarea id="textInput" placeholder="Type or paste your English paragraphs here to analyze..." oninput="analyzeText()"></textarea>
-    
-    <div class="stats">
-        <div class="stat-item">
-            <span id="wordCount">0</span>
-            Words
-        </div>
-        <div class="stat-item">
-            <span id="charCount">0</span>
-            Characters
-        </div>
-        <div class="stat-item">
-            <span id="readingTime">0</span>
-            Min Read
-        </div>
+        <button onclick="showAlert()">Contact Me</button>
     </div>
-</div>
-
-<script>
-    function analyzeText() {
-        const text = document.getElementById('textInput').value;
-        
-        // कैरेक्टर काउंट
-        document.getElementById('charCount').innerText = text.length;
-        
-        // वर्ड काउंट
-        let words = text.trim().split(/\s+/);
-        let cleanWordCount = words.filter(word => word.length > 0).length;
-        document.getElementById('wordCount').innerText = cleanWordCount;
-        
-        // रीडिंग टाइम (औसत 200 शब्द प्रति मिनट के हिसाब से)
-        let time = Math.ceil(cleanWordCount / 200);
-        document.getElementById('readingTime').innerText = cleanWordCount > 0 ? time : 0;
-    }
-</script>
-
+    <script>
+        function showAlert() {
+            alert('Feel free to reach out at: jayeshbairwa63@gmail.com');
+        }
+    </script>
 </body>
 </html>
